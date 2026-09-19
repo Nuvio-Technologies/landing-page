@@ -13,8 +13,8 @@ export const SITE = {
     'Custom web apps, mobile apps and business systems for companies in Malaysia and Singapore, built by Nuvio Technologies, the team behind Humio HR software.',
   logo: '/images/brand/nuvio-logo.png',
   themeColor: '#09090B',
-  // Assumed from the email domain; confirm before launch.
-  url: 'https://thenuviotech.com',
+  // Canonical host. The apex domain should redirect here.
+  url: 'https://www.thenuviotech.com',
   location: 'Malaysia',
   emails: ['xqteoh@thenuviotech.com', 'alex@thenuviotech.com'],
   // Enquiries go to both founders; each gets their own WhatsApp link.
