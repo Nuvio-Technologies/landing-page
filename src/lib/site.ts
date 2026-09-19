@@ -7,16 +7,24 @@ export const SITE = {
   tagline: 'Custom software, built to run your business',
   description:
     'Nuvio Technologies is a Malaysian software company building custom web apps, mobile apps and business systems — and the team behind Humio, the all-in-one HR platform for Malaysia and Singapore.',
-  // TODO: replace with the production domain once it's decided.
-  url: 'https://nuvio.example.com',
+  // Assumed from the email domain; confirm before launch.
+  url: 'https://thenuviotech.com',
   location: 'Malaysia',
-  // TODO: confirm the public inbox address.
-  email: 'hello@nuvio.example.com',
-  // Number used for "Chat on WhatsApp" and contact-form submissions.
-  whatsapp: '60102417618',
+  emails: ['xqteoh@thenuviotech.com', 'alex@thenuviotech.com'],
+  // Enquiries go to both founders; each gets their own WhatsApp link.
   contacts: [
-    { name: 'Beh Wei Quan', role: 'Founder', phone: '+60 16-251 8214' },
-    { name: 'Teoh Xin Quan', role: 'Co-founder', phone: '+60 10-241 7618' },
+    {
+      name: 'Beh Wei Quan',
+      firstName: 'Wei Quan',
+      role: 'Founder',
+      phone: '+60 16-251 8214',
+    },
+    {
+      name: 'Teoh Xin Quan',
+      firstName: 'Xin Quan',
+      role: 'Co-founder',
+      phone: '+60 10-241 7618',
+    },
   ],
 } as const;
 
@@ -30,7 +38,7 @@ export const NAV_ITEMS = [
   { label: 'Contact', href: '#contact' },
 ] as const;
 
-export function whatsappLink(message?: string) {
-  const base = `https://wa.me/${SITE.whatsapp}`;
+export function whatsappLink(phone: string, message?: string) {
+  const base = `https://wa.me/${phone.replace(/\D/g, '')}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }

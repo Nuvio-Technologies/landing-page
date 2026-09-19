@@ -28,6 +28,9 @@ export default function Contact() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const submitter = (e.nativeEvent as SubmitEvent)
+      .submitter as HTMLButtonElement | null;
+    const phone = submitter?.value || SITE.contacts[0].phone;
     const data = new FormData(e.currentTarget);
     const field = (name: string) => String(data.get(name) ?? '').trim();
     const details = [
@@ -46,7 +49,7 @@ export default function Contact() {
       '',
       field('message'),
     ].join('\n');
-    window.open(whatsappLink(message), '_blank', 'noopener');
+    window.open(whatsappLink(phone, message), '_blank', 'noopener');
   }
 
   return (
@@ -63,8 +66,8 @@ export default function Contact() {
             </h2>
             <p className="text-mid-gray text-base">
               Tell us what you&apos;re trying to solve and we&apos;ll get back
-              to you with next steps. Prefer to talk? Call or WhatsApp us
-              directly.
+              to you with next steps. Send the form to either of us on WhatsApp,
+              or call or email us directly.
             </p>
           </div>
 
@@ -80,12 +83,23 @@ export default function Contact() {
                       · {person.role}
                     </span>
                   </p>
-                  <Link
-                    href={`tel:${person.phone.replace(/[^+\d]/g, '')}`}
-                    className="text-mid-gray hover:text-foreground text-sm"
-                  >
-                    {person.phone}
-                  </Link>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <Link
+                      href={`tel:${person.phone.replace(/[^+\d]/g, '')}`}
+                      className="text-mid-gray hover:text-foreground text-sm"
+                    >
+                      {person.phone}
+                    </Link>
+                    <Link
+                      href={whatsappLink(person.phone)}
+                      target="_blank"
+                      rel="noopener"
+                      className="text-foreground hover:text-muted-foreground flex items-center gap-1 text-sm"
+                    >
+                      <SiWhatsapp className="size-3.5" />
+                      WhatsApp
+                    </Link>
+                  </div>
                 </div>
               </li>
             ))}
@@ -93,12 +107,15 @@ export default function Contact() {
               <Mail className="text-star mt-1 size-4 shrink-0" />
               <div>
                 <p className="text-foreground font-semibold">Email</p>
-                <Link
-                  href={`mailto:${SITE.email}`}
-                  className="text-mid-gray hover:text-foreground text-sm"
-                >
-                  {SITE.email}
-                </Link>
+                {SITE.emails.map((email) => (
+                  <Link
+                    key={email}
+                    href={`mailto:${email}`}
+                    className="text-mid-gray hover:text-foreground block text-sm"
+                  >
+                    {email}
+                  </Link>
+                ))}
               </div>
             </li>
             <li className="flex items-start gap-3">
@@ -111,13 +128,6 @@ export default function Contact() {
               </div>
             </li>
           </ul>
-
-          <Button asChild variant="ghost" className="self-start">
-            <Link href={whatsappLink()} target="_blank" rel="noopener">
-              <SiWhatsapp />
-              Chat on WhatsApp
-            </Link>
-          </Button>
         </div>
 
         {/* Form */}
@@ -215,13 +225,23 @@ export default function Contact() {
             />
           </div>
 
-          <Button
-            type="submit"
-            className="h-20 w-full rounded-none border-0 text-base"
-          >
-            <SiWhatsapp />
-            Send via WhatsApp
-          </Button>
+          <div className="grid sm:grid-cols-2">
+            {SITE.contacts.map((person, i) => (
+              <Button
+                key={person.name}
+                type="submit"
+                value={person.phone}
+                className={cn(
+                  'h-20 w-full rounded-none border-0 text-base',
+                  i === 0 &&
+                    'sm:border-r-charcoal max-sm:border-b-charcoal max-sm:border-b sm:border-r',
+                )}
+              >
+                <SiWhatsapp />
+                Send to {person.firstName}
+              </Button>
+            ))}
+          </div>
         </form>
       </div>
     </section>

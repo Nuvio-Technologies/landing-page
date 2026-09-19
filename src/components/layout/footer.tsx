@@ -13,8 +13,12 @@ const navigation = [
   {
     title: 'Get in touch',
     links: [
-      { name: 'WhatsApp', href: whatsappLink(), external: true },
-      { name: 'Email', href: `mailto:${SITE.email}` },
+      ...SITE.contacts.map((person) => ({
+        name: `WhatsApp ${person.firstName}`,
+        href: whatsappLink(person.phone),
+        external: true,
+      })),
+      ...SITE.emails.map((email) => ({ name: email, href: `mailto:${email}` })),
       { name: 'Humio', href: HUMIO_URL, external: true },
     ],
   },
