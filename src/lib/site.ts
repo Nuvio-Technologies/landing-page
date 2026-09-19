@@ -20,8 +20,8 @@ export const SITE = {
   // Enquiries go to both founders; each gets their own WhatsApp link.
   contacts: [
     {
-      name: 'Beh Wei Quan',
-      firstName: 'Wei Quan',
+      name: 'Alex Beh',
+      firstName: 'Alex',
       role: 'Founder',
       phone: '+60 16-251 8214',
     },
