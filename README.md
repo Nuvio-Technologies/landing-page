@@ -1,33 +1,21 @@
-# Aspect NextJS Template
+# Nuvio Technologies — Landing Page
 
-Aspect NextJS Template is a premium template built by https://www.shadcnblocks.com
+Marketing site for Nuvio Technologies, built on the [Aspect](https://www.shadcnblocks.com/template/aspect) premium template from shadcnblocks (Next.js 15, Tailwind 4, shadcn/ui).
 
-- [Demo](https://aspect-nextjs-template.vercel.app/)
-- [Documentation](https://docs.shadcnblocks.com/templates/getting-started)
-
-## Screenshot
-
-![Aspect NextJS Template screenshot](./public/og-image.jpg)
-
-## Getting Started
+## Development
 
 ```bash
 npm install
+npm run dev     # http://localhost:3000
+npm run build   # static export to ./out
 ```
 
-```bash
-npm run dev
-```
+The site is a static export (`output: 'export'`), so `./out` can be deployed to Vercel, Netlify, Cloudflare Pages or any static host.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing content
 
-## Tech Stack
+- Company details (email, WhatsApp number, contacts, domain): `src/lib/site.ts`
+- Homepage sections: `src/app/page.tsx` and `src/components/sections/`
+- Logo (placeholder): `src/components/layout/logo.tsx` and `src/app/icon.svg`
 
-- Nextjs 15 / App Router
-- Tailwind 4
-- shadcn/ui
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com)
-# aspect-nextjs-template
+The contact form has no backend: it opens WhatsApp with the enquiry pre-filled.

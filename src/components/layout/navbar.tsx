@@ -1,28 +1,17 @@
 'use client';
 
-import { ChevronRight, Feather } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu';
+import { NAV_ITEMS } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
 import { ThemeToggle } from '../ui/theme-toggle';
+import { Logo } from './logo';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const pathname = usePathname();
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -37,125 +26,44 @@ const Navbar = () => {
     };
   }, [isMenuOpen]);
 
-  const ITEMS = [
-    {
-      label: 'Product',
-      href: '#product',
-      dropdownItems: [
-        {
-          title: 'Features',
-          href: '/features',
-          description:
-            'Streamline is built on the habits that make the best product teams successful',
-          icon: Feather,
-        },
-      ],
-    },
-    { label: 'About us', href: '/about' },
-    { label: 'Pricing', href: '/pricing' },
-    { label: 'FAQ', href: '/faq' },
-    {
-      label: 'Blog',
-      href: '/blog',
-    },
-    { label: 'Contact', href: '/contact' },
-  ];
-
   const bgColor = 'bg-obsidian';
 
   return (
     <header
       className={cn(
-        'border-b-dark-gray relative z-50 h-20 border-b px-2.5 lg:px-0',
+        'border-b-dark-gray sticky top-0 z-50 h-20 border-b px-2.5 lg:px-0',
         bgColor,
       )}
     >
       <div className="border-r-dark-gray border-l-dark-gray container flex h-20 items-center border">
         <div className="flex w-full items-center justify-between py-3">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/images/layout/logo.svg"
-              alt="logo"
-              width={129}
-              height={32}
-              className="invert dark:invert-0"
-            />
+          <Link href="/" aria-label="Nuvio Technologies home">
+            <Logo />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="flex items-center justify-center">
-            <NavigationMenu className="mr-4 hidden items-center gap-8 lg:flex">
-              <NavigationMenuList>
-                {ITEMS.map((link) =>
-                  link.dropdownItems ? (
-                    <NavigationMenuItem key={link.label} className="text-sm">
-                      <NavigationMenuTrigger
-                        className={cn(
-                          'text-foreground bg-transparent text-sm font-normal',
-                          'hover:bg-transparent focus:bg-transparent active:bg-transparent',
-                          'hover:text-muted-foreground focus:text-muted-foreground',
-                          'data-[state=open]:text-muted-foreground data-[state=open]:bg-transparent',
-                          'transition-none',
-                        )}
-                      >
-                        {link.label}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent
-                        className={cn('bg-obsidian rounded-md')}
-                      >
-                        <ul className="bg-obsidian w-[400px] p-3">
-                          {link.dropdownItems.map((item) => (
-                            <li key={item.title}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={item.href}
-                                  className="hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground hover:bg-dark-gray flex items-center rounded-md p-3 leading-none no-underline outline-hidden transition-colors select-none"
-                                >
-                                  <div className="flex gap-2">
-                                    <item.icon className="text-mid-gray size-4 shrink-0" />
+            <nav className="mr-4 hidden items-center gap-1 lg:flex">
+              {NAV_ITEMS.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-foreground hover:text-muted-foreground p-2 text-sm"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
 
-                                    <div className="space-y-1.5">
-                                      <div className="text-foreground text-sm leading-none font-medium">
-                                        {item.title}
-                                      </div>
-                                      <p className="text-mid-gray line-clamp-2 text-sm leading-tight">
-                                        {item.description}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-                  ) : (
-                    <NavigationMenuItem key={link.label}>
-                      <Link
-                        href={link.href}
-                        className={cn(
-                          'text-foreground hover:text-muted-foreground p-2 text-sm',
-                          pathname === link.href && 'text-muted-foreground',
-                        )}
-                      >
-                        {link.label}
-                      </Link>
-                    </NavigationMenuItem>
-                  ),
-                )}
-              </NavigationMenuList>
-            </NavigationMenu>
-
-            {/* Auth Buttons */}
             <div className="flex items-center gap-2.5">
-              <Link
-                href="/login"
+              <div
                 className={`transition-opacity duration-300 ${isMenuOpen ? 'max-lg:pointer-events-none max-lg:opacity-0' : 'opacity-100'}`}
               >
-                <Button size="sm">Login</Button>
-              </Link>
+                <Button asChild size="sm" className="max-sm:hidden">
+                  <Link href="#contact">Start a project</Link>
+                </Button>
+              </div>
 
               <div
                 className={`transition-opacity duration-300 ${isMenuOpen ? 'max-lg:pointer-events-none max-lg:opacity-0' : 'opacity-100'}`}
@@ -167,8 +75,11 @@ const Navbar = () => {
               <button
                 className="text-muted-foreground relative flex size-8 lg:hidden"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-expanded={isMenuOpen}
               >
-                <span className="sr-only">Open main menu</span>
+                <span className="sr-only">
+                  {isMenuOpen ? 'Close main menu' : 'Open main menu'}
+                </span>
                 <div className="absolute top-1/2 left-1/2 block w-[18px] -translate-x-1/2 -translate-y-1/2">
                   <span
                     aria-hidden="true"
@@ -202,73 +113,21 @@ const Navbar = () => {
       >
         <div className="border-dark-gray h-[calc(100vh-80px)] border-x px-5">
           <nav className="mt-6 flex flex-1 flex-col gap-6">
-            {ITEMS.map((link) =>
-              link.dropdownItems ? (
-                <div key={link.label} className="">
-                  <button
-                    onClick={() =>
-                      setOpenDropdown(
-                        openDropdown === link.label ? null : link.label,
-                      )
-                    }
-                    className="text-foreground flex w-full items-center justify-between text-lg tracking-[-0.36px]"
-                    aria-label={`${link.label} menu`}
-                    aria-expanded={openDropdown === link.label}
-                  >
-                    {link.label}
-                    <ChevronRight
-                      className={cn(
-                        'h-4 w-4 transition-transform',
-                        openDropdown === link.label ? 'rotate-90' : '',
-                      )}
-                      aria-hidden="true"
-                    />
-                  </button>
-                  <div
-                    className={cn(
-                      'border-b-dark-gray ml-1 space-y-3 overflow-hidden border-b transition-all',
-                      openDropdown === link.label
-                        ? 'mt-3 max-h-[1000px] pb-6 opacity-100'
-                        : 'max-h-0 opacity-0',
-                    )}
-                  >
-                    {link.dropdownItems.map((item) => (
-                      <Link
-                        key={item.title}
-                        href={item.href}
-                        onClick={() => {
-                          setIsMenuOpen(false);
-                          setOpenDropdown(null);
-                        }}
-                        className="hover:bg-accent flex items-start gap-3 rounded-md p-2"
-                      >
-                        <item.icon className="text-mid-gray size-6 shrink-0" />
-                        <div>
-                          <div className="text-foreground font-medium">
-                            {item.title}
-                          </div>
-                          <p className="text-muted-foreground text-sm">
-                            {item.description}
-                          </p>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className={cn(
-                    'text-foreground text-lg tracking-[-0.36px]',
-                    pathname === link.href && 'text-muted-foreground',
-                  )}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ),
-            )}
+            {NAV_ITEMS.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="text-foreground text-lg tracking-[-0.36px]"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Button asChild className="mt-2 w-full">
+              <Link href="#contact" onClick={() => setIsMenuOpen(false)}>
+                Start a project
+              </Link>
+            </Button>
           </nav>
         </div>
       </div>

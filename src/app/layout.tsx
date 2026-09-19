@@ -6,6 +6,7 @@ import { Figtree } from 'next/font/google';
 import { Footer } from '@/components/layout/footer';
 import Navbar from '@/components/layout/navbar';
 import { ThemeProvider } from '@/components/theme-provider';
+import { SITE } from '@/lib/site';
 
 const figtree = Figtree({
   subsets: ['latin'],
@@ -14,61 +15,40 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE.url),
   title: {
-    default: 'Aspect - Modern Next.js Template',
-    template: '%s | Aspect',
+    default: `${SITE.name} | ${SITE.tagline}`,
+    template: `%s | ${SITE.name}`,
   },
-  description:
-    'A modern, fully featured Next.js template built with Shadcn/UI, TailwindCSS and TypeScript, perfect for your next web application.',
+  description: SITE.description,
   keywords: [
-    'Next.js',
-    'React',
-    'JavaScript',
-    'TypeScript',
-    'TailwindCSS',
-    'Template',
-    'Shadcn/UI',
-    'Web Development',
+    'custom software development Malaysia',
+    'software house Malaysia',
+    'web app development',
+    'mobile app development',
+    'business systems',
+    'system integration',
+    'Humio',
+    'Nuvio Technologies',
   ],
-  authors: [{ name: 'Aspect Team' }],
-  creator: 'Aspect Team',
-  publisher: 'Aspect',
+  authors: [{ name: SITE.name }],
+  creator: SITE.name,
+  publisher: SITE.name,
   robots: {
     index: true,
     follow: true,
   },
-  icons: {
-    icon: [
-      { url: '/favicon/favicon.ico', sizes: '48x48' },
-      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon/favicon.ico' },
-    ],
-    apple: [{ url: '/favicon/apple-touch-icon.png', sizes: '180x180' }],
-    shortcut: [{ url: '/favicon/favicon.ico' }],
-  },
   openGraph: {
-    title: 'Aspect - Modern Next.js Template',
-    description:
-      'A modern, fully featured Next.js template built with Shadcn/UI, TailwindCSS and TypeScript, perfect for your next web application.',
-    siteName: 'Aspect',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Aspect - Modern Next.js Template',
-      },
-    ],
+    type: 'website',
+    locale: 'en_MY',
+    title: `${SITE.name} | ${SITE.tagline}`,
+    description: SITE.description,
+    siteName: SITE.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aspect - Modern Next.js Template',
-    description:
-      'A modern, fully featured Next.js template built with Shadcn/UI, TailwindCSS and TypeScript, perfect for your next web application.',
-    images: ['/og-image.jpg'],
-    creator: '@aspect',
+    title: `${SITE.name} | ${SITE.tagline}`,
+    description: SITE.description,
   },
 };
 
@@ -78,8 +58,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`h-screen ${figtree.variable} antialiased`}>
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <body className={`${figtree.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

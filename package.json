@@ -1,7 +1,7 @@
 {
-  "name": "aspect-nextjs-template",
+  "name": "nuvio-landing-page",
   "version": "1.0.0",
-  "author": "Shadcnblocks.com",
+  "author": "Nuvio Technologies",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",

@@ -9,63 +9,59 @@ import {
   AccordionTrigger,
 } from '../ui/accordion';
 
+// TODO: confirm the commercial terms below (quotes, IP, support) match how Nuvio contracts.
 const questions = [
   {
-    question: 'What is Streamline?',
+    question: 'How much does a custom software project cost?',
     answer:
-      'Streamline is a modern financial dashboard that aggregates all your bank accounts, subsidiaries, and currencies into one unified, real-time view—complete with analytics, alerts, and custom reporting.',
+      'It depends on scope: a focused internal tool is a very different project from a customer-facing platform. After a short discovery session we give you a written scope and quote, so there are no surprises mid-project.',
   },
   {
-    question: 'How is Streamline different from Linear and Jira?',
+    question: 'How long does it take to build?',
     answer:
-      'Unlike Linear and Jira, which focus on issue tracking and project management, Streamline is built specifically for financial operations—bringing real-time banking data, cash-flow insights, and compliance tools into a single platform.',
+      'Most first releases ship in 6–12 weeks. We prefer to launch a focused version early, put it in front of real users, and then build on what they actually need.',
   },
   {
-    question: 'How do I update my account?',
+    question: 'Who owns the code and the data?',
     answer:
-      'Head over to your Account Settings → Profile, where you can update your email, password, notification preferences, and connected institutions at any time.',
+      'You do. On final payment the source code, designs and all of your data are yours, and we can deploy to your own cloud account if you prefer.',
   },
   {
-    question: 'Is support free, or do I need to Google everything?',
+    question: 'Do you work with small businesses and SMEs?',
     answer:
-      'All users receive complimentary email support and access to our knowledge base. Professional and Enterprise plans include 24/7 live chat and phone support.',
+      'Yes. Many of our projects replace spreadsheets, WhatsApp threads and paper forms for growing Malaysian and Singaporean companies. We scope the work to fit your stage and budget.',
   },
   {
-    question: 'Are you going to be subsumed by AI?',
+    question: 'What happens after launch?',
     answer:
-      'We leverage AI for smart alerts and insights, but rest assured, Streamline remains a human-driven platform—no plan to replace your finance team with a chatbot!',
+      'We offer ongoing support and maintenance: monitoring, security updates, bug fixes and new features. We run our own product, Humio, in production every day, so keeping software healthy is part of how we work.',
   },
   {
-    question: 'How do I connect my bank accounts and subsidiaries?',
+    question: 'Can you take over or improve an existing system?',
     answer:
-      'Simply navigate to the Integrations tab, select your bank or financial institution, and authorize access with your online banking credentials. Once connected, all accounts under that legal entity—subsidiaries and branches included—will automatically appear in your dashboard.',
-  },
-  {
-    question: 'Which banks and financial institutions are supported?',
-    answer:
-      'We support thousands of institutions worldwide—including major banks like JPMorgan Chase, Bank of America, HSBC, Barclays, Deutsche Bank, and hundreds more. Visit the Integrations page in-app for the full list.',
+      'Yes. We start with a code and infrastructure review, fix the urgent issues, and then agree on a plan to stabilise, modernise or rebuild, whichever makes sense for your business.',
   },
 ];
 
 const AspectFaq = () => {
   return (
     <section
-      id="aspect-faq"
+      id="faq"
       className="bg-obsidian relative overflow-hidden px-2.5 lg:px-0"
     >
-      <div className="border-l-dark-gray border-r-dark-gray border-t-dark-gray relative container border px-0">
-        <div className="border-b-dark-gray border-b px-6 py-8 lg:px-8 lg:py-20">
-          <div className="flex max-w-lg flex-col gap-4 lg:gap-6">
-            <h1 className="text-foreground text-3xl tracking-tight">
+      <div className="border-l-dark-gray border-r-dark-gray border-t-dark-gray relative container border border-t-0 px-0 lg:grid lg:grid-cols-[2fr_3fr]">
+        <div className="border-b-dark-gray lg:border-r-dark-gray border-b px-6 py-12 lg:border-r lg:border-b-0 lg:px-8 lg:py-20">
+          <div className="flex max-w-lg flex-col gap-4 lg:sticky lg:top-28 lg:gap-6">
+            <h2 className="text-foreground text-3xl tracking-tight">
               Frequently Asked Questions
-            </h1>
+            </h2>
             <p className="text-mid-gray text-base">
-              Browse our most common user questions and discover practical tips
-              for getting the most out of our platform.
+              The questions we hear most before a project starts. Don&apos;t see
+              yours? Just ask.
             </p>
             <div>
               <Button asChild variant="secondary" size="sm">
-                <Link href="/faq">Read more</Link>
+                <Link href="#contact">Ask a question</Link>
               </Button>
             </div>
           </div>
@@ -76,9 +72,9 @@ const AspectFaq = () => {
               <AccordionItem
                 key={i}
                 value={`left-${i}`}
-                className="border-b-dark-gray data-[state=open]:bg-jet border-b p-6"
+                className="border-b-dark-gray data-[state=open]:bg-jet border-b p-6 last:border-b-0"
               >
-                <AccordionTrigger className="text-xl">
+                <AccordionTrigger className="text-left text-lg lg:text-xl">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-mid-gray text-base">
