@@ -202,7 +202,7 @@ const HumioShowcase = () => {
             <div
               key={feature.title}
               className={cn(
-                'text-foreground h-full w-full lg:min-h-56 items-start justify-start rounded-none px-6 py-12 text-start whitespace-normal lg:p-8',
+                'text-foreground h-full w-full items-start justify-start rounded-none px-6 py-12 text-start whitespace-normal lg:min-h-56 lg:p-8',
                 'lg:border-r-dark-gray border-b-dark-gray border-b lg:border-r lg:border-b-0 lg:last:border-none',
               )}
             >
