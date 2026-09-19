@@ -7,6 +7,12 @@ export const SITE = {
   tagline: 'Custom software, built to run your business',
   description:
     'Nuvio Technologies is a Malaysian software company building custom web apps, mobile apps and business systems — and the team behind Humio, the all-in-one HR platform for Malaysia and Singapore.',
+  // Search-result title (~60 chars) and description (~155 chars).
+  seoTitle: 'Nuvio Technologies | Custom Software Development in Malaysia',
+  seoDescription:
+    'Custom web apps, mobile apps and business systems for companies in Malaysia and Singapore, built by Nuvio Technologies, the team behind Humio HR software.',
+  logo: '/images/brand/nuvio-logo.png',
+  themeColor: '#09090B',
   // Assumed from the email domain; confirm before launch.
   url: 'https://thenuviotech.com',
   location: 'Malaysia',

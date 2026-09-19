@@ -18,7 +18,7 @@ type Service = {
   };
 };
 
-const SERVICES: Service[] = [
+export const SERVICES: Service[] = [
   {
     title: 'Web Applications',
     description: 'Portals, platforms and dashboards.',
