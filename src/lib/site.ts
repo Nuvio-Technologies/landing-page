@@ -4,6 +4,10 @@
 export const SITE = {
   name: 'Nuvio Technologies',
   shortName: 'Nuvio',
+  // SSM business registration (new format, with the old number in brackets).
+  legalName: 'NUVIO TECHNOLOGIES',
+  registrationNumber: '202603248669',
+  oldRegistrationNumber: '003891431-V',
   tagline: 'Custom software, built to run your business',
   description:
     'Nuvio Technologies is a Malaysian software company building custom web apps, mobile apps and business systems — and the team behind Humio, the all-in-one HR platform for Malaysia and Singapore.',

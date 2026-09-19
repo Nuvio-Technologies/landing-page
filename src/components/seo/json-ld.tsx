@@ -14,6 +14,12 @@ const graph = {
       '@id': ORG_ID,
       name: SITE.name,
       alternateName: SITE.shortName,
+      legalName: SITE.legalName,
+      identifier: {
+        '@type': 'PropertyValue',
+        name: 'SSM business registration number',
+        value: SITE.registrationNumber,
+      },
       url: SITE.url,
       logo: {
         '@type': 'ImageObject',

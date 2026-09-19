@@ -68,10 +68,16 @@ export const Footer = () => {
           />
         </div>
         <div className="bg-jet border-dark-gray grid gap-2 border-t border-r border-l px-6 py-4 sm:grid-cols-2 lg:px-8">
-          <p className="text-foreground text-xs">
-            © {new Date().getFullYear()} {SITE.name}. All rights reserved.
-          </p>
-          <p className="text-mid-gray text-xs sm:text-right">
+          <div className="flex flex-col gap-1">
+            <p className="text-foreground text-xs">
+              © {new Date().getFullYear()} {SITE.name}. All rights reserved.
+            </p>
+            <p className="text-mid-gray text-xs">
+              SSM Reg. No. {SITE.registrationNumber} (
+              {SITE.oldRegistrationNumber})
+            </p>
+          </div>
+          <p className="text-mid-gray text-xs sm:self-end sm:text-right">
             Made in {SITE.location}
           </p>
         </div>
